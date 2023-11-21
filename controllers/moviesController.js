@@ -62,7 +62,7 @@ movies.put("/:id", async (req, res) => {
     const { id } = req.params;
     const updatedMovie = await updateMovie(id, req.body);
 
-    if (updatedMovie.is) {
+    if (updatedMovie.id) {
       res.status(200).json(updatedMovie);
     } else {
       res.status(404).json({ error: "No movie at that id!" });

@@ -1,4 +1,4 @@
-\c movies_ dev;
+\c movies_dev;
 
 INSERT INTO movies (title, director, release_date, genre, duration, rating, has_emmy)
 VALUES

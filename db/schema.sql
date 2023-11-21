@@ -12,5 +12,5 @@ CREATE TABLE movies (
     genre TEXT,
     duration INT,
     rating DECIMAL(3, 1),
-    has_emmy BOOLEAN,
+    has_emmy BOOLEAN
 );
