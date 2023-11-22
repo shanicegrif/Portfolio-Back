@@ -8,9 +8,9 @@ CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     director TEXT NOT NULL,
-    release_date DATE,
+    release_date TEXT,
     genre TEXT,
     duration INT,
-    rating DECIMAL(3, 1),
+    rating DECIMAL(3, 1) NOT NULL,
     has_emmy BOOLEAN
 );

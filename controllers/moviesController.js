@@ -7,6 +7,15 @@ const {
   updateMovie,
 } = require("../queries/movies");
 const movies = express.Router();
+const {
+  checkTitle,
+  checkDirector,
+  checkDate,
+  checkGenre,
+  checkDuration,
+  checkRating,
+  checkBoolean,
+} = require("../validations/checkMovies.js");
 
 movies.get("/", async (req, res) => {
   const allMovies = await getAllMovies();
@@ -33,14 +42,24 @@ movies.get("/:id", async (req, res) => {
   }
 });
 
-movies.post("/", async (req, res) => {
-  try {
-    const createdMovie = await createMovie(req.body);
-    res.status(201).json(createdMovie);
-  } catch (error) {
-    res.status(400).json({ error: "Movies was not created!" });
+movies.post(
+  "/",
+  checkTitle,
+  checkDirector,
+  checkDate,
+  checkGenre,
+  checkDuration,
+  checkRating,
+  checkBoolean,
+  async (req, res) => {
+    try {
+      const createdMovie = await createMovie(req.body);
+      res.status(201).json(createdMovie);
+    } catch (error) {
+      res.status(400).json({ error: "Movies was not created!" });
+    }
   }
-});
+);
 
 movies.delete("/:id", async (req, res) => {
   try {
@@ -57,19 +76,29 @@ movies.delete("/:id", async (req, res) => {
   }
 });
 
-movies.put("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedMovie = await updateMovie(id, req.body);
+movies.put(
+  "/:id",
+  checkTitle,
+  checkDirector,
+  checkDate,
+  checkGenre,
+  checkDuration,
+  checkRating,
+  checkBoolean,
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedMovie = await updateMovie(id, req.body);
 
-    if (updatedMovie.id) {
-      res.status(200).json(updatedMovie);
-    } else {
-      res.status(404).json({ error: "No movie at that id!" });
+      if (updatedMovie.id) {
+        res.status(200).json(updatedMovie);
+      } else {
+        res.status(404).json({ error: "No movie at that id!" });
+      }
+    } catch (error) {
+      res.status(400).json({ error: "Movie was not updated!" });
     }
-  } catch (error) {
-    res.status(400).json({ error: "Movie was not updated!" });
   }
-});
+);
 
 module.exports = movies;

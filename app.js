@@ -9,7 +9,7 @@ app.use("/movies", moviesController);
 
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Movie Server!");
+  res.send("Welcome to FlickFleet Movie Server!");
 });
 
 app.get("*", (req, res) => {
