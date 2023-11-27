@@ -7,8 +7,8 @@ CREATE DATABASE movies_dev;
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
-    director TEXT NOT NULL,
-    release_date TEXT,
+    director TEXT,
+    release_date TEXT NOT NUll,
     genre TEXT,
     duration INT,
     rating DECIMAL(3, 1) NOT NULL,

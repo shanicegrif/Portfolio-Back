@@ -8,19 +8,17 @@ const checkTitle = (req, res, next) => {
 };
 
 const checkDirector = (req, res, next) => {
-  if (typeof req.body.director === "string") {
+  if (typeof req.body.director === "string" || req.body.director === undefined) {
     console.log("Director passed");
     next();
   } else {
-    res.status(400).json({ error: "Director is required" });
+    res.status(400).json({ error: "Director should be a string" });
   }
 };
 
 const checkDate = (req, res, next) => {
   if (
-    typeof req.body.release_date === "string" ||
-    req.body.release_date === undefined
-  ) {
+    typeof req.body.release_date === "string") {
     const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
     if (dateFormatRegex.test(req.body.release_date)) {
       console.log("Date passed");
@@ -87,7 +85,7 @@ const checkBoolean = (req, res, next) => {
     console.log("Boolean passed");
     next();
   } else {
-    res.status(400).json({ error: "Name is required" });
+    res.status(400).json({ error: "has_emmy is required" });
   }
 };
 
